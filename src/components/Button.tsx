@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   // Base Styles
   const baseStyles =
-    'rounded-lg font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2';
+    'rounded-lg font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 select-none cursor-pointer disabled:cursor-not-allowed';
 
   // Responsive Size Variants
   const sizeStyles = {
@@ -41,7 +41,7 @@ const Button: React.FC<ButtonProps> = ({
       aria-label={
         ariaLabel || (typeof children === 'string' ? children : 'Button')
       }
-      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} disabled:opacity-50 ${className}`}
       {...props}
     >
       {children}

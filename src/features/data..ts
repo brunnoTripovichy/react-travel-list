@@ -1,28 +1,28 @@
 export interface Item {
-  id: number;
+  id: string;
   name: string;
+  packed: boolean;
   description?: string;
   quantity?: number;
-  packed?: boolean;
 }
 
 export const data: Item[] = [
   {
-    id: 1,
+    id: '23423b423vbnvcvbcb23v4',
     name: 'Passport',
     description: 'This is important',
     quantity: 2,
     packed: false,
   },
   {
-    id: 2,
+    id: 'jnhjfgjh234hgjh2g34hg23',
     name: 'Socks',
     description: 'Should be enough',
     quantity: 5,
     packed: true,
   },
   {
-    id: 3,
+    id: '32gjghjg43jhjg232444jhgvg',
     name: 'Charger',
     description: 'Need for gps',
     quantity: 2,

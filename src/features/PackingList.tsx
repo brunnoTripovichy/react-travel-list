@@ -1,3 +1,4 @@
+import Checkbox from '../components/Checkbox';
 import DataTable from '../components/DataTable';
 import Header1 from '../components/Header1';
 import { data, type Item } from './data.';
@@ -8,7 +9,14 @@ const PackingList = () => {
     {
       key: 'packed',
       header: 'Packed?',
-      render: (row: Item) => (row.packed ? '✅' : '❌'),
+      render: (row: Item) => (
+        <Checkbox
+          id={row.id}
+          label=""
+          checked={row.packed}
+          onChange={(checked) => console.log(checked)}
+        />
+      ),
     },
     { key: 'name', header: 'Name' },
     { key: 'description', header: 'Description' },
