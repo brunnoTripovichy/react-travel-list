@@ -3,7 +3,7 @@ import React from 'react';
 interface Column<T> {
   key: keyof T | string;
   header: string | React.ReactNode;
-  render?: (row: T) => React.ReactNode; // Optional custom template
+  render?: (row: T) => React.ReactNode;
 }
 
 interface DataTableProps<T> {
@@ -23,15 +23,18 @@ const DataTable = <T,>({ columns, data }: DataTableProps<T>) => {
   }
 
   return (
-    <div className="overflow-auto rounded-lg shadow-lg border border-gray-300 bg-white">
+    <div className="overflow-x-auto rounded-lg shadow-lg border border-gray-300 bg-white">
       <table className="min-w-full border-collapse">
         {/* Table Header */}
-        <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white uppercase text-sm">
+        <thead className="bg-gradient-to-r from-blue-500 to-blue-600 text-white uppercase text-xs sm:text-sm md:text-base">
           <tr>
             {columns.map((col, index) => (
               <th
                 key={index}
-                className="px-6 py-3 text-left font-semibold tracking-wide border-b border-gray-300"
+                className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-left font-semibold tracking-wide border-b border-gray-300"
+                scope="col"
+                tabIndex={0}
+                role="columnheader"
               >
                 {col.header}
               </th>
@@ -57,7 +60,12 @@ const DataTable = <T,>({ columns, data }: DataTableProps<T>) => {
                     : ((row[col.key as keyof T] as React.ReactNode) ?? '—');
 
                   return (
-                    <td key={colIndex} className="px-6 py-4">
+                    <td
+                      key={colIndex}
+                      className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-xs sm:text-sm md:text-base"
+                      tabIndex={0}
+                      role="cell"
+                    >
                       {cellValue}
                     </td>
                   );
@@ -68,7 +76,9 @@ const DataTable = <T,>({ columns, data }: DataTableProps<T>) => {
             <tr>
               <td
                 colSpan={columns.length}
-                className="px-6 py-6 text-center text-gray-500"
+                className="px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 text-center text-gray-500 text-xs sm:text-sm md:text-base"
+                tabIndex={0}
+                role="alert"
               >
                 No data available
               </td>

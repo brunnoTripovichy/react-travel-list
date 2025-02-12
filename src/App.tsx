@@ -12,7 +12,12 @@ const App = () => {
       <Header />
 
       {/* Scrollable Main Content (fills available space) */}
-      <main className="flex-1 overflow-auto bg-blue-50">
+      <main
+        className="flex-1 overflow-auto bg-blue-50
+                   px-3 py-2 sm:px-5 sm:py-3 
+                   md:px-16 md:py-8 
+                   lg:px-24 lg:py-12"
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/packing-list" element={<PackingList />} />
