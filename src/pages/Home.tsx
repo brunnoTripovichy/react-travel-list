@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import Button from '../components/Button';
 
 const Home = () => {
@@ -11,9 +12,11 @@ const Home = () => {
         essentials again.
       </p>
 
-      <Button className="mt-8" ariaLabel="Get Started">
-        Get Started
-      </Button>
+      <Link to="/packing-list">
+        <Button className="mt-8" ariaLabel="Get Started">
+          Get Started
+        </Button>
+      </Link>
     </div>
   );
 };
