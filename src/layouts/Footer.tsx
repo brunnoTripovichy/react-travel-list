@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="fixed bottom-0 w-full bg-yellow-100 text-gray-800 py-3 md:py-4">
+    <footer className="sticky bottom-0 w-full bg-yellow-100 text-gray-800 py-3 md:py-4 shadow-md">
       <div className="container mx-auto text-center text-sm md:text-lg">
         <p className="break-words">
           &copy; {new Date().getFullYear()} Travel List. All Rights Reserved.

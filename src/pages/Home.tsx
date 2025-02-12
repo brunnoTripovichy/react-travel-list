@@ -3,7 +3,7 @@ import Button from '../components/Button';
 
 const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-screen bg-blue-50 text-gray-800 py-20 md:py-24 w-full text-center">
+    <div className="flex flex-col items-center justify-center h-full text-gray-800 w-full text-center">
       <h2 className="text-2xl md:text-3xl font-bold break-words">
         Plan Your Perfect Trip
       </h2>

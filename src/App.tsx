@@ -8,13 +8,18 @@ import PackingList from './features/PackingList';
 const App = () => {
   return (
     <div className="flex flex-col h-screen">
+      {/* Sticky Header */}
       <Header />
-      <main className="flex-1 overflow-auto">
+
+      {/* Scrollable Main Content (fills available space) */}
+      <main className="flex-1 overflow-auto bg-blue-50">
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="packing-list" element={<PackingList />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/packing-list" element={<PackingList />} />
         </Routes>
       </main>
+
+      {/* Sticky Footer */}
       <Footer />
     </div>
   );
