@@ -7,6 +7,7 @@ import ItemForm from './ItemForm';
 import RemoveItem from './RemoveItem';
 import ItemsSummary from './ItemsSummary';
 import Dropdown from '../components/Dropdown';
+import Button from '../components/Button';
 
 const PackingList = () => {
   // Items state
@@ -34,6 +35,11 @@ const PackingList = () => {
     },
     [],
   );
+
+  // Callback to clear up items
+  const handleClearItems = useCallback(() => {
+    setItems([]);
+  }, []);
 
   // Compute sorted items
   const sortedItems = useMemo<Item[]>(() => {
@@ -96,7 +102,7 @@ const PackingList = () => {
         <DataTable columns={columns} data={sortedItems} />
 
         {/* Table actions */}
-        <div className="grid grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-4 gap-4 mt-4 flex items-end">
           {/* Sort Dropdown */}
           <div className="col-start-2">
             <Dropdown
@@ -107,6 +113,18 @@ const PackingList = () => {
               onChange={(value) => setSort(value)}
               placeholder="Select a sort option..."
             />
+          </div>
+
+          {/* Clear list */}
+          <div className="col-start-3 flex justify-center">
+            <Button
+              variant="danger"
+              onClick={handleClearItems}
+              size="sm"
+              ariaLabel="Clear List"
+            >
+              Clear List
+            </Button>
           </div>
         </div>
       </div>
