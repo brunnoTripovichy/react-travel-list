@@ -92,7 +92,7 @@ const Dropdown = <T,>({
         </svg>
       </div>
 
-      {/* ✅ Dropdown Menu (Now Renders Below Input) */}
+      {/* ✅ Dropdown Menu with Selected Highlight */}
       {isOpen && (
         <ul
           className="absolute left-0 p-1 top-full w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto
@@ -105,7 +105,12 @@ const Dropdown = <T,>({
                 onChange(option.value);
                 setIsOpen(false);
               }}
-              className="px-4 py-2 hover:bg-blue-100 cursor-pointer transition-colors duration-200 rounded-sm"
+              className={`px-4 py-2 cursor-pointer transition-colors duration-200 rounded-sm 
+                          ${
+                            value === option.value
+                              ? 'bg-blue-200 font-semibold' // ✅ Selected Highlight
+                              : 'hover:bg-blue-100'
+                          }`}
             >
               {option.label}
             </li>

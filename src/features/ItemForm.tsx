@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import Button from '../components/Button';
 import Dropdown from '../components/Dropdown';
 import Form from '../components/Form';
@@ -6,6 +6,10 @@ import Header3 from '../components/Header3';
 import InputText from '../components/InputText';
 
 const ItemForm = () => {
+  const [name, setName] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [quantity, setQuantity] = useState<number | undefined>(undefined);
+
   const handleSubmit = useCallback((event) => {
     console.log('Form submitted', event);
   }, []);
@@ -18,7 +22,13 @@ const ItemForm = () => {
         </div>
 
         <div className="...">
-          <InputText id="name" label="Name" placeholder="Enter a name" />
+          <InputText
+            id="name"
+            label="Name"
+            placeholder="Enter a name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
         </div>
 
         <div className="...">
@@ -26,6 +36,8 @@ const ItemForm = () => {
             id="description"
             label="Description"
             placeholder="Enter a description"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
           />
         </div>
 
@@ -45,9 +57,9 @@ const ItemForm = () => {
               { value: 9, label: '9' },
               { value: 10, label: '10' },
             ]}
-            value={null}
+            value={quantity}
             placeholder="Select a quantity"
-            onChange={(value) => console.log(value)}
+            onChange={(value) => setQuantity(value)}
           />
         </div>
 
