@@ -1,8 +1,18 @@
+import type React from 'react';
 import Button from '../components/Button';
 
-const RemoveItem = () => {
+export interface RemoveItemProps {
+  onRemoveItem: () => void;
+}
+
+const RemoveItem: React.FC<RemoveItemProps> = ({ onRemoveItem }) => {
   return (
-    <Button variant="danger" size="sm" ariaLabel="Remove">
+    <Button
+      variant="danger"
+      size="sm"
+      ariaLabel="Remove"
+      onClick={onRemoveItem}
+    >
       Remove
     </Button>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 interface CheckboxProps {
   id: string;
@@ -17,25 +17,35 @@ const Checkbox: React.FC<CheckboxProps> = ({
   className = '',
   disabled = false,
 }) => {
+  // Callback to handle checkbox change
+  const handleChange = useCallback(() => {
+    if (!disabled) {
+      onChange(!checked);
+    }
+  }, [checked, onChange, disabled]);
+
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      {/* Hidden Checkbox Input */}
+      {/* Hidden Checkbox Input (Still required for accessibility) */}
       <input
         type="checkbox"
         id={id}
         checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
+        onChange={handleChange} // This still works when using keyboard
         disabled={disabled}
         className="hidden peer"
       />
 
-      {/* Custom Styled Checkbox */}
+      {/* Clickable Checkbox Box */}
       <div
-        tabIndex={-1} // Prevents keyboard focus causing caret
+        onClick={handleChange} // clicking this triggers the change
+        role="checkbox"
+        aria-checked={checked}
+        tabIndex={0}
         className={`w-5 h-5 flex items-center justify-center border-2 rounded-md transition-all duration-200 cursor-pointer select-none
-                   border-gray-400 hover:border-blue-600 // ✅ Unchecked now changes border on hover
+                   border-gray-400 hover:border-blue-600
                    peer-checked:bg-blue-500 peer-checked:border-blue-500
-                   peer-checked:hover:bg-blue-600 peer-checked:hover:border-blue-600 // ✅ Checked changes both background & border
+                   peer-checked:hover:bg-blue-600 peer-checked:hover:border-blue-600
                    peer-disabled:cursor-not-allowed peer-disabled:opacity-50`}
       >
         {/* SVG Checkmark (Always White & Properly Centered) */}
@@ -55,9 +65,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
         )}
       </div>
 
-      {/* Clickable Label (Prevents Text Selection & Caret) */}
+      {/* Clickable Label */}
       <label
         htmlFor={id}
+        onClick={handleChange}
         className="text-gray-800 text-sm sm:text-base font-medium cursor-pointer select-none 
                    peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
       >

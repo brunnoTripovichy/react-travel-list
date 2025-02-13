@@ -68,14 +68,14 @@ const Dropdown = <T,>({
         onClick={toggleDropdown}
         tabIndex={0}
       >
-        {/* ✅ Placeholder and Selected Value (Properly Aligned) */}
+        {/* Placeholder and Selected Value */}
         <span className={`truncate ${value ? '' : 'text-gray-400'}`}>
           {value
             ? options.find((option) => option.value === value)?.label
             : placeholder}
         </span>
 
-        {/* ✅ Aligned Custom SVG Caret */}
+        {/* Aligned Custom SVG Caret */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -92,7 +92,7 @@ const Dropdown = <T,>({
         </svg>
       </div>
 
-      {/* ✅ Dropdown Menu with Selected Highlight */}
+      {/* Dropdown Menu with Selected Highlight */}
       {isOpen && (
         <ul
           className="absolute left-0 p-1 top-full w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto
@@ -108,7 +108,7 @@ const Dropdown = <T,>({
               className={`px-4 py-2 cursor-pointer transition-colors duration-200 rounded-sm 
                           ${
                             value === option.value
-                              ? 'bg-blue-200 font-semibold' // ✅ Selected Highlight
+                              ? 'bg-blue-200 font-semibold' // Selected Highlight
                               : 'hover:bg-blue-100'
                           }`}
             >

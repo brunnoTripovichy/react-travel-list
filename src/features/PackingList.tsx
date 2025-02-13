@@ -14,6 +14,21 @@ const PackingList = () => {
     setItems((prevItems) => [...prevItems, newItem]);
   }, []);
 
+  // Callback to Remove an Item
+  const handleRemoveItem = useCallback((id: string): void => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  }, []);
+
+  // Callback to Update an Item packed status
+  const handleUpdatePacked = useCallback(
+    (id: string, packed: boolean): void => {
+      setItems((prevItems) =>
+        prevItems.map((item) => (item.id === id ? { ...item, packed } : item)),
+      );
+    },
+    [],
+  );
+
   const columns = [
     {
       key: 'packed',
@@ -23,13 +38,7 @@ const PackingList = () => {
           id={row.id}
           label=""
           checked={row.packed}
-          onChange={(checked) =>
-            setItems((prevItems) =>
-              prevItems.map((item) =>
-                item.id === row.id ? { ...item, packed: checked } : item,
-              ),
-            )
-          }
+          onChange={(checked: boolean) => handleUpdatePacked(row.id, checked)}
         />
       ),
     },
@@ -39,7 +48,9 @@ const PackingList = () => {
     {
       key: 'actions',
       header: 'Actions',
-      render: (row: Item) => <RemoveItem />,
+      render: (row: Item) => (
+        <RemoveItem onRemoveItem={() => handleRemoveItem(row.id)} />
+      ),
     },
   ];
 
