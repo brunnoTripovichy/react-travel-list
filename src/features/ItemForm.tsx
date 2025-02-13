@@ -4,15 +4,36 @@ import Dropdown from '../components/Dropdown';
 import Form from '../components/Form';
 import Header3 from '../components/Header3';
 import InputText from '../components/InputText';
+import type { Item } from './data.';
 
-const ItemForm = () => {
+interface ItemFormProps {
+  onAddItem: (item: Item) => void; // Callback function from parent
+}
+
+const ItemForm: React.FC<ItemFormProps> = ({ onAddItem }) => {
   const [name, setName] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [quantity, setQuantity] = useState<number | undefined>(undefined);
 
-  const handleSubmit = useCallback((event) => {
-    console.log('Form submitted', event);
-  }, []);
+  const handleSubmit = useCallback(() => {
+    if (!name.trim()) return;
+
+    // Create new item object
+    const newItem: Item = {
+      id: Math.random().toString(36).substring(2, 9), // Unique ID
+      name,
+      description,
+      quantity,
+      packed: false,
+    };
+
+    onAddItem(newItem); // Send data to parent
+
+    // Clear form fields
+    setName('');
+    setDescription('');
+    setQuantity(undefined);
+  }, [description, name, onAddItem, quantity]);
 
   return (
     <Form onSubmit={handleSubmit}>

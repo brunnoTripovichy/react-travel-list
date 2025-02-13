@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react';
 import Checkbox from '../components/Checkbox';
 import DataTable from '../components/DataTable';
 import Header1 from '../components/Header1';
@@ -6,6 +7,13 @@ import ItemForm from './ItemForm';
 import RemoveItem from './RemoveItem';
 
 const PackingList = () => {
+  const [items, setItems] = useState<Item[]>(data);
+
+  // Callback to Add a New Item
+  const handleAddItem = useCallback((newItem: Item): void => {
+    setItems((prevItems) => [...prevItems, newItem]);
+  }, []);
+
   const columns = [
     {
       key: 'packed',
@@ -15,7 +23,13 @@ const PackingList = () => {
           id={row.id}
           label=""
           checked={row.packed}
-          onChange={(checked) => console.log(checked)}
+          onChange={(checked) =>
+            setItems((prevItems) =>
+              prevItems.map((item) =>
+                item.id === row.id ? { ...item, packed: checked } : item,
+              ),
+            )
+          }
         />
       ),
     },
@@ -25,7 +39,7 @@ const PackingList = () => {
     {
       key: 'actions',
       header: 'Actions',
-      render: () => <RemoveItem />,
+      render: (row: Item) => <RemoveItem />,
     },
   ];
 
@@ -33,11 +47,12 @@ const PackingList = () => {
     <div>
       <Header1 className="mb-6">Packing List</Header1>
 
+      {/* Pass `handleAddItem` to ItemForm */}
       <div className="mb-4">
-        <ItemForm />
+        <ItemForm onAddItem={handleAddItem} />
       </div>
 
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={items} />
     </div>
   );
 };
