@@ -5,6 +5,7 @@ import Header1 from '../components/Header1';
 import { data, type Item } from './data.';
 import ItemForm from './ItemForm';
 import RemoveItem from './RemoveItem';
+import ItemsSummary from './ItemsSummary';
 
 const PackingList = () => {
   const [items, setItems] = useState<Item[]>(data);
@@ -63,7 +64,11 @@ const PackingList = () => {
         <ItemForm onAddItem={handleAddItem} />
       </div>
 
-      <DataTable columns={columns} data={items} />
+      <div className="mb-4">
+        <DataTable columns={columns} data={items} />
+      </div>
+
+      <ItemsSummary items={items} />
     </div>
   );
 };
