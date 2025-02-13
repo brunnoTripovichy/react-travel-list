@@ -1,6 +1,7 @@
 import Dropdown from '../components/Dropdown';
 import Form from '../components/Form';
 import Header3 from '../components/Header3';
+import InputText from '../components/InputText';
 
 const ItemForm = () => {
   return (
@@ -26,6 +27,8 @@ const ItemForm = () => {
         placeholder="Select a quantity"
         onChange={(value) => console.log(value)}
       />
+
+      <InputText id="name" label="Name" />
 
       <button type="submit">Add</button>
     </Form>

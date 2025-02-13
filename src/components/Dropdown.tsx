@@ -47,7 +47,10 @@ const Dropdown = <T,>({
   }, []);
 
   return (
-    <div className={`relative w-full ${className}`} ref={dropdownRef}>
+    <div
+      className={`flex flex-col gap-1 relative w-full ${className}`}
+      ref={dropdownRef}
+    >
       {/* Dropdown Label */}
       <label
         htmlFor={id}
@@ -60,7 +63,7 @@ const Dropdown = <T,>({
       <div
         className={`relative w-full px-2 py-1 sm:px-4 sm:py-1 md:px-4 md:py-2 text-xs sm:text-sm md:text-base 
                     border border-gray-300 rounded-md bg-white text-gray-800 shadow-sm cursor-pointer
-                    focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all duration-200
+                    focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all duration-200 select-none
                     hover:border-gray-400 disabled:cursor-not-allowed disabled:opacity-50 flex justify-between items-center`}
         onClick={toggleDropdown}
         tabIndex={0}
