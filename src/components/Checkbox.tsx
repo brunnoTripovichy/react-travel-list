@@ -29,17 +29,16 @@ const Checkbox: React.FC<CheckboxProps> = ({
         className="hidden peer"
       />
 
-      {/* Custom Styled Checkbox (Now with Hover States) */}
+      {/* Custom Styled Checkbox */}
       <div
         tabIndex={-1} // Prevents keyboard focus causing caret
-        className={`w-5 h-5 flex items-center justify-center border-2 border-gray-400 rounded-md 
-                   bg-white transition-all duration-200 cursor-pointer
-                   hover:bg-blue-600 hover:border-blue-600 active:bg-blue-700 active:border-blue-700
-                   peer-checked:bg-blue-500 peer-checked:border-blue-500 
-                   peer-disabled:cursor-not-allowed peer-disabled:opacity-50
-                   peer-disabled:hover:bg-transparent peer-disabled:hover:border-gray-400 select-none`}
+        className={`w-5 h-5 flex items-center justify-center border-2 rounded-md transition-all duration-200 cursor-pointer select-none
+                   border-gray-400 hover:border-blue-600 // ✅ Unchecked now changes border on hover
+                   peer-checked:bg-blue-500 peer-checked:border-blue-500
+                   peer-checked:hover:bg-blue-600 peer-checked:hover:border-blue-600 // ✅ Checked changes both background & border
+                   peer-disabled:cursor-not-allowed peer-disabled:opacity-50`}
       >
-        {/* SVG Checkmark for Perfect Alignment */}
+        {/* SVG Checkmark (Always White & Properly Centered) */}
         {checked && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +48,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="w-3.5 h-3.5 md:w-4 md:h-4"
+            className="w-3.5 h-3.5 md:w-4 md:h-4 pointer-events-none"
           >
             <polyline points="20 6 9 17 4 12" />
           </svg>
