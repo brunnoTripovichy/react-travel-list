@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Checkbox from '../components/Checkbox';
 import DataTable from '../components/DataTable';
 import Header1 from '../components/Header1';
@@ -6,9 +6,14 @@ import { data, type Item } from './data.';
 import ItemForm from './ItemForm';
 import RemoveItem from './RemoveItem';
 import ItemsSummary from './ItemsSummary';
+import Dropdown from '../components/Dropdown';
 
 const PackingList = () => {
+  // Items state
   const [items, setItems] = useState<Item[]>(data);
+
+  // Sort state
+  const [sort, setSort] = useState<string>('');
 
   // Callback to Add a New Item
   const handleAddItem = useCallback((newItem: Item): void => {
@@ -29,6 +34,29 @@ const PackingList = () => {
     },
     [],
   );
+
+  // Compute sorted items
+  const sortedItems = useMemo<Item[]>(() => {
+    if (sort === 'name') {
+      return [...items].sort((a, b) => a.name.localeCompare(b.name));
+    }
+    if (sort === 'description') {
+      return [...items].sort((a, b) =>
+        (a.description ?? '').localeCompare(b.description ?? ''),
+      );
+    }
+    if (sort === 'quantity') {
+      return [...items].sort((a, b) => (a.quantity ?? 0) - (b.quantity ?? 0));
+    }
+    return items;
+  }, [items, sort]);
+
+  // Available sort options
+  const sortOptions = [
+    { value: 'name', label: 'Sort by Name' },
+    { value: 'description', label: 'Sort by Description' },
+    { value: 'quantity', label: 'Sort by Quantity' },
+  ];
 
   const columns = [
     {
@@ -64,8 +92,23 @@ const PackingList = () => {
         <ItemForm onAddItem={handleAddItem} />
       </div>
 
-      <div className="mb-4">
-        <DataTable columns={columns} data={items} />
+      <div className="mb-10">
+        <DataTable columns={columns} data={sortedItems} />
+
+        {/* Table actions */}
+        <div className="grid grid-cols-4 gap-4 mt-4">
+          {/* Sort Dropdown */}
+          <div className="col-start-2">
+            <Dropdown
+              id="sort"
+              label="Sort by:"
+              options={sortOptions}
+              value={sort}
+              onChange={(value) => setSort(value)}
+              placeholder="Select a sort option..."
+            />
+          </div>
+        </div>
       </div>
 
       <ItemsSummary items={items} />
