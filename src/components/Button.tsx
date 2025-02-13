@@ -29,10 +29,11 @@ const Button: React.FC<ButtonProps> = ({
   // Color Variants
   const variantStyles = {
     primary:
-      'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-300',
+      'bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700 focus-visible:ring-blue-300',
     secondary:
-      'bg-gray-500 text-white hover:bg-gray-600 focus-visible:ring-gray-300',
-    danger: 'bg-red-500 text-white hover:bg-red-600 focus-visible:ring-red-300',
+      'bg-gray-500 text-white hover:bg-gray-600 active:bg-gray-700 focus-visible:ring-gray-300',
+    danger:
+      'bg-red-500 text-white hover:bg-red-600 active:bg-red-700 focus-visible:ring-red-300',
   };
 
   return (

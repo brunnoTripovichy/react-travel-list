@@ -34,7 +34,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         tabIndex={-1} // Prevents keyboard focus causing caret
         className={`w-5 h-5 flex items-center justify-center border-2 border-gray-400 rounded-md 
                    bg-white transition-all duration-200 cursor-pointer
-                   hover:bg-blue-700 hover:border-blue-700
+                   hover:bg-blue-600 hover:border-blue-600 active:bg-blue-700 active:border-blue-700
                    peer-checked:bg-blue-500 peer-checked:border-blue-500 
                    peer-disabled:cursor-not-allowed peer-disabled:opacity-50
                    peer-disabled:hover:bg-transparent peer-disabled:hover:border-gray-400 select-none`}
