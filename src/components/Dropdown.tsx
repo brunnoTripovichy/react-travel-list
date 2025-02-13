@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface DropdownProps<T> {
   id: string;
@@ -37,11 +37,11 @@ const Dropdown = <T,>({
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
     ) {
-      setTimeout(() => setIsOpen(false), 150); // Delay to prevent instant closing
+      setIsOpen(false);
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
