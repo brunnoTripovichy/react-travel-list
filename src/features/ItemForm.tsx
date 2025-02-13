@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import Button from '../components/Button';
 import Dropdown from '../components/Dropdown';
 import Form from '../components/Form';
@@ -5,19 +6,27 @@ import Header3 from '../components/Header3';
 import InputText from '../components/InputText';
 
 const ItemForm = () => {
+  const handleSubmit = useCallback((event) => {
+    console.log('Form submitted', event);
+  }, []);
+
   return (
-    <Form onSubmit={(event) => event.preventDefault()}>
+    <Form onSubmit={handleSubmit}>
       <div className="grid grid-cols-3 gap-4">
         <div className="col-span-3 ...">
           <Header3>Add an Item</Header3>
         </div>
 
         <div className="...">
-          <InputText id="name" label="Name" />
+          <InputText id="name" label="Name" placeholder="Enter a name" />
         </div>
 
         <div className="...">
-          <InputText id="description" label="Description" />
+          <InputText
+            id="description"
+            label="Description"
+            placeholder="Enter a description"
+          />
         </div>
 
         <div className="...">

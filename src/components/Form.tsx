@@ -13,9 +13,14 @@ const Form: React.FC<FormProps> = ({
   className = '',
   ariaLabel,
 }) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    onSubmit(event);
+  };
+
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       className={`w-full  bg-white 
                   px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4
                   rounded-lg shadow-md transition-all duration-200 
